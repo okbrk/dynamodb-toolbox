@@ -1,128 +1,230 @@
-![DynamoDB-Toolbox](./assets/header.png)
+# DynamoDB Toolbox <!-- omit in toc -->
 
-<div align="center">
-  <h1>DynamoDB-Toolbox</h1>
-  <a aria-label="NPM version" href="https://www.npmjs.com/package/dynamodb-toolbox">
-    <img alt="" src="https://img.shields.io/npm/v/dynamodb-toolbox?color=a2c8f7&style=for-the-badge">
-  </a>
-  <a aria-label="License" href="https://github.com/dynamodb-toolbox/dynamodb-toolbox/blob/main/LICENSE">
-    <img alt="" src="https://img.shields.io/github/license/dynamodb-toolbox/dynamodb-toolbox?color=%230e355b&style=for-the-badge">
-  </a>
-    <img alt="" src=https://img.shields.io/npm/dt/dynamodb-toolbox?color=%232e6ca9&style=for-the-badge>
-    <br/>
-    <br/>
-  <a href="https://www.dynamodbtoolbox.com/docs/getting-started/overview">Quickstart</a>
-  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-  <a href="https://dynamodbtoolbox.com">Docs</a>
-  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-  <a href="https://github.com/sponsors/ThomasAribart">Sponsor</a>
-  <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-  <a href="https://dynamodb-toolshack.com">DynamoDB-Toolshack</a>
-  <br />
-  <hr />
-</div>
+[![npm](https://img.shields.io/npm/v/dynamodb-toolbox.svg)](https://www.npmjs.com/package/dynamodb-toolbox)
+[![npm](https://img.shields.io/npm/l/dynamodb-toolbox.svg)](https://www.npmjs.com/package/dynamodb-toolbox)
+[![Coverage Status](https://coveralls.io/repos/github/jeremydaly/dynamodb-toolbox/badge.svg?branch=main)](https://coveralls.io/github/jeremydaly/dynamodb-toolbox?branch=main)
+[![npm](https://img.shields.io/npm/dm/dynamodb-toolbox.svg)](https://www.npmjs.com/package/dynamodb-toolbox)
 
-💖 _Huge thanks to the [sponsors](https://github.com/sponsors/ThomasAribart) who help me maintain this repo:_
+![dynamodb-toolbox](https://user-images.githubusercontent.com/2053544/69847647-b7910780-1245-11ea-8403-a35a0158f3aa.png)
 
-<p align="center">
-  <a href="https://www.theodo.fr/"><img src="https://github.com/theodo.png" width="50px" alt="Theodo" title="Theodo"/></a>&nbsp;&nbsp;
-  <!-- sponsors --><a href="https://github.com/feathersdev"><img src="https://github.com/feathersdev.png" width="50px" alt="feathers.dev" title="feathers.dev"/></a>&nbsp;&nbsp;<a href="https://github.com/li-jia-nan"><img src="https://github.com/li-jia-nan.png" width="50px" alt="lijianan" title="lijianan"/></a>&nbsp;&nbsp;<a href="https://github.com/RaeesBhatti"><img src="https://github.com/RaeesBhatti.png" width="50px" alt="Raees Iqbal" title="Raees Iqbal"/></a>&nbsp;&nbsp;<a href="https://github.com/lucas-subli"><img src="https://github.com/lucas-subli.png" width="50px" alt="Lucas Saldanha Ferreira" title="Lucas Saldanha Ferreira"/></a>&nbsp;&nbsp;<a href="https://github.com/syntaxfm"><img src="https://github.com/syntaxfm.png" width="50px" alt="Syntax" title="Syntax"/></a>&nbsp;&nbsp;<!-- sponsors -->
-  <a href="https://github.com/sponsors/ThomasAribart"><img src="assets/plus-sign.png" width="50px" alt="Plus sign" title="Your brand here!"/></a>
-</p>
+## Single Table Designs have never been this easy! <!-- omit in toc -->
 
----
+The **DynamoDB Toolbox** is a set of tools that makes it easy to work with [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and the [DocumentClient](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/dynamodb-example-document-client.html). It's designed with **Single Tables** in mind, but works just as well with multiple tables. It lets you define your Entities (with typings and aliases) and map them to your DynamoDB tables. You can then **generate the API parameters** to `put`, `get`, `delete`, `update`, `query`, `scan`, `batchGet`, and `batchWrite` data by passing in JavaScript objects. The DynamoDB Toolbox will map aliases, validate and coerce types, and even write complex `UpdateExpression`s for you. 😉
 
-## Features <!-- omit in toc -->
+## Why single table design?
+Learn more about single table design in [Alex Debrie's blog](https://www.alexdebrie.com/posts/dynamodb-single-table).
 
-DynamoDB-Toolbox is a light abstraction layer over the DocumentClient that **turns your DynamoDB journey into a ✨ bliss ✨**
+## Version 0.9 🙌 <!-- omit in toc -->
 
-🤗 **Simpler queries**: DynamoDB-Toolbox does all the heavy-lifting of crafting those **complex DynamoDB requests**. It makes your code **clearer**, **more concise** and **easier to maintain**.
+Feedback is welcome and much appreciated! (Huge thanks to [@ThomasAribart](https://github.com/ThomasAribart) for all his work on this 🙌)
 
-📐 **Data validation**: Both pushed and fetched items are **validated** against your schemas, which guarantees the **consistency** of your data and the **reliability** of your code.
+## Using AWS SDK v2?
 
-✨ **A rich schema syntax** that supports a broad range of edge cases like **defaults**, **composition**, **transformation** and **polymorphism**.
+dynamodb-toolbox@v0.8 and above is using AWS SDK v3.
+If you are using AWS SDK v2, please use versions that are lower than 0.8.
 
-🔄 **Portability**: Schemas can be imported from or exported to [Zod](https://zod.dev) and [JSON Schema](https://json-schema.org) with **type-inference preserved**.
+## Docs & Community
 
-🌈 **Type-safety pushed to the limit**: Increase your development velocity with **instantaneous feedbacks** and **slick auto-completion**.
+- [Full Documentation](https://www.dynamodbtoolbox.com/docs)
+- [GitHub Discussions](https://github.com/jeremydaly/dynamodb-toolbox/discussions)
 
-🌴 **Tree-shakable**: Only import what you need.
+## Quick Start
 
-☝️ **Single-table designs**: DynamoDB-Toolbox makes **querying multiple entities within the same table extremely simple**, although it works just as well with multiple tables.
+Using your favorite package manager, install DynamoDB Toolbox and the aws-sdk v3 dependencies in your project by running one of the following commands:
 
-🪶 **LLRT compatible**: DynamoDB-Toolbox has no dependency and can be used within [LLRT functions](https://github.com/awslabs/llrt).
+```bash
+# npm
+npm i dynamodb-toolbox
+npm install @aws-sdk/lib-dynamodb @aws-sdk/client-dynamodb
 
-## Visit the 👉 [official documentation](https://dynamodbtoolbox.com/) 👈 to get started! <!-- omit in toc -->
-
-> [!TIP]  
-> Want to get more our of your code? Try [DynamoDB-Toolshack](https://dynamodb-toolshack.com/) 🙌
->
-> DynamoDB-Toolshack is a SaaS that connects to DynamoDB-Toolbox to elevate your DynamoDB experience with a <b>schema-aware UI</b>, table <b>consitency checks</b> and a <b>migration system</b>.
->
-> [Join the Beta](https://aws.amazon.com/marketplace/pp/prodview-rexdp6m3af2hg) and get started in just a few clicks!
-
-## Why use DynamoDB-Toolbox? <!-- omit in toc -->
-
-If you're here, we're assuming you know DynamoDB.
-
-If you don't, check out the [official AWS docs](https://aws.amazon.com/dynamodb).
-
-> **TLDR**: _[DynamoDB](https://aws.amazon.com/dynamodb) is a key-value DB designed to run high-performance applications at any scale. It **automatically scales** up and down based on your current traffic, and removes the need to maintain connections, which makes it the **go-to DB for many projects**, including (but not limited to) **serverless applications**._
-
-If you've ever used the official [Document Client](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/dynamodb-example-dynamodb-utilities.html), you know that **it’s painful to use**.
-
-Take a look at this `UpdateCommand` example straight from the [AWS documentation](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/UpdateItemCommand/):
-
-```ts
-await documentClient.send(
-  new UpdateCommand({
-    TableName: 'Music',
-    Key: {
-      // 👇 No type-safety on the Primary Key
-      artist: 'Acme Band',
-      songTitle: 'Happy Day'
-    },
-    // 👇 Complex string expressions (+ still no type-safety)
-    UpdateExpression: 'SET #Y = :y, #AT = :t',
-    // 👇 Attribute names provided separately
-    ExpressionAttributeNames: {
-      '#AT': 'albumTitle',
-      '#Y': 'year'
-    },
-    // 👇 Attribute values as well
-    ExpressionAttributeValues: {
-      // 👇 No validation or type-safety to enforce DB schema
-      ':t': 'Louder Than Ever',
-      ':y': '2015'
-    },
-    ReturnValues: 'ALL_NEW'
-  })
-)
+# yarn
+yarn add dynamodb-toolbox
+yarn add @aws-sdk/lib-dynamodb @aws-sdk/client-dynamodb
 ```
 
-It's a very simple example (updating two fields of a `Music` item), yet already complex 😰
+Require or import `Table` and `Entity` from `dynamodb-toolbox`:
 
-**Things only get messier as your data grows in complexity**: What if your items have many attributes, with some of them deep or optional? What if you need to index an item based on its value or handle different types of items? What about polymorphism?
-
-In those cases, which are fairly common, **the required code to generate those requests gets very hard to maintain**. That's when DynamoDB-Toolbox comes to the rescue 💪
-
-Here's is a quick preview with the DynamoDB-Toolbox version of the `UpdateCommand` described above:
-
-```ts
-// Validated AND type-safe syntax 🙌
-await MusicEntity.build(UpdateItemCommand)
-  .item({
-    artist: 'Acme Band',
-    songTitle: 'Happy Day',
-    albumTitle: 'Louder Than Ever',
-    year: '2015'
-  })
-  .options({ returnValues: 'ALL_NEW' })
-  .send()
+```typescript
+import { Table, Entity } from 'dynamodb-toolbox'
 ```
 
-And just like that, we went from an obscure 20 lines to a **readable and elegant 10-liner** 🤩
+Create a Table (with the DocumentClient using aws-sdk v3):
 
-Not bad, eh? [Let's get started](https://dynamodbtoolbox.com/)!
+```typescript
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb'
 
-### [Become a Sponsor!](https://github.com/sponsors/thomasaribart/)
+const marshallOptions = {
+  // Whether to automatically convert empty strings, blobs, and sets to `null`.
+  convertEmptyValues: false, // if not false explicitly, we set it to true.
+  // Whether to remove undefined values while marshalling.
+  removeUndefinedValues: false, // false, by default.
+  // Whether to convert typeof object to map attribute.
+  convertClassInstanceToMap: false, // false, by default.
+}
+
+const unmarshallOptions = {
+  // Whether to return numbers as a string instead of converting them to native JavaScript numbers.
+  // NOTE: this is required to be true in order to use the bigint data type.
+  wrapNumbers: false, // false, by default.
+}
+
+const translateConfig = { marshallOptions, unmarshallOptions }
+
+// Instantiate a DocumentClient
+export const DocumentClient = DynamoDBDocumentClient.from(new DynamoDBClient({}), translateConfig)
+
+
+// Instantiate a table
+const MyTable = new Table({
+  // Specify table name (used by DynamoDB)
+  name: 'my-table',
+
+  // Define partition and sort keys
+  partitionKey: 'pk',
+  sortKey: 'sk',
+
+  // Add the DocumentClient
+  DocumentClient
+})
+```
+
+Create an Entity:
+
+```typescript
+const Customer = new Entity({
+  // Specify entity name
+  name: 'Customer',
+
+  // Define attributes
+  attributes: {
+    id: { partitionKey: true }, // flag as partitionKey
+    sk: { hidden: true, sortKey: true }, // flag as sortKey and mark hidden
+    age: { type: 'number' }, // set the attribute type
+    name: { type: 'string', map: 'data' }, // map 'name' to table attribute 'data'
+    emailVerified: { type: 'boolean', required: true }, // specify attribute as required
+    co: { alias: 'company' }, // alias table attribute 'co' to 'company'
+    status: ['sk', 0], // composite key mapping
+    date_added: ['sk', 1] // composite key mapping
+  },
+
+  // Assign it to our table
+  table: MyTable
+
+  // In Typescript, the "as const" statement is needed for type inference
+} as const)
+```
+
+Put an item:
+
+```typescript
+// Create an item (using table attribute names or aliases)
+const customer = {
+  id: 123,
+  age: 35,
+  name: 'Jane Smith',
+  emailVerified: true,
+  company: 'ACME',
+  status: 'active',
+  date_added: '2020-04-24'
+}
+
+// Use the 'put' method of Customer:
+await Customer.put(customer)
+```
+
+The item will be saved to DynamoDB like this:
+
+```typescript
+{
+  "pk": 123,
+  "sk": "active#2020-04-24",
+  "age": 35,
+  "data": "Jane Smith",
+  "emailVerified": true,
+  "co": "ACME",
+  // Attributes auto-generated by DynamoDB-Toolbox
+  "_et": "customer", // Entity name (required for parsing)
+  "_ct": "2021-01-01T00:00:00.000Z", // Item creation date (optional)
+  "_md": "2021-01-01T00:00:00.000Z" // Item last modification date (optional)
+}
+```
+
+You can then get the data:
+
+```typescript
+// Specify primary key
+const primaryKey = {
+  id: 123,
+  status: 'active',
+  date_added: '2020-04-24'
+}
+
+// Use the 'get' method of Customer
+const response = await Customer.get(primaryKey)
+```
+
+Since v0.4, the method inputs, options and response types are inferred from the Entity definition:
+
+```typescript
+await Customer.put({
+  id: 123,
+  // ❌ Sort key is required ("sk" or both "status" and "date_added")
+  age: 35,
+  name: ['Jane', 'Smith'], // ❌ name should be a string
+  emailVerified: undefined, // ❌ attribute is marked as required
+  company: 'ACME'
+})
+
+const { Item: customer } = await Customer.get({
+  id: 123,
+  status: 'active',
+  date_added: '2020-04-24' // ✅ Valid primary key
+})
+type Customer = typeof customer
+// 🙌 Type is equal to:
+type ExpectedCustomer =
+  | {
+      id: any
+      age?: number | undefined
+      name?: string | undefined
+      emailVerified: boolean
+      company?: any
+      status: any
+      date_added: any
+      entity: string
+      created: string
+      modified: string
+    }
+  | undefined
+```
+
+See [Type Inference](https://www.dynamodbtoolbox.com/docs/type-inference) in the documentation for more details.
+
+## Features
+
+- **Table Schemas and DynamoDB Typings:** Define your Table and Entity data models using a simple JavaScript object structure, assign DynamoDB data types, and optionally set defaults.
+- **Magic UpdateExpressions:** Writing complex `UpdateExpression` strings is a major pain, especially if the input data changes the underlying clauses or requires dynamic (or nested) attributes. This library handles everything from simple `SET` clauses, to complex `list` and `set` manipulations, to defaulting values with smartly applied `if_not_exists()` to avoid overwriting data.
+- **Bidirectional Mapping and Aliasing:** When building a single table design, you can define multiple entities that map to the same table. Each entity can reuse fields (like `pk` and`sk`) and map them to different aliases depending on the item type. Your data is automatically mapped correctly when reading and writing data.
+- **Composite Key Generation and Field Mapping:** Doing some fancy data modeling with composite keys? Like setting your `sortKey` to `[country]#[region]#[state]#[county]#[city]#[neighborhood]` model hierarchies? DynamoDB Toolbox lets you map data to these composite keys which will both autogenerate the value _and_ parse them into fields for you.
+- **Type Coercion and Validation:** Automatically coerce values to strings, numbers and booleans to ensure consistent data types in your DynamoDB tables. Validate `list`, `map`, and `set` types against your data. Oh yeah, and `set`s are automatically handled for you. 😉
+- **Powerful Query Builder:** Specify a `partitionKey`, and then easily configure your sortKey conditions, filters, and attribute projections to query your primary or secondary indexes. This library can even handle pagination with a simple `.next()` method.
+- **Simple Table Scans:** Scan through your table or secondary indexes and add filters, projections, parallel scans and more. And don't forget the pagination support with `.next()`.
+- **Filter and Condition Expression Builder:** Build complex Filter and Condition expressions using a standardized `array` and `object` notation. No more appending strings!
+- **Projection Builder:** Specify which attributes and paths should be returned for each entity type, and automatically filter the results.
+- **Secondary Index Support:** Map your secondary indexes (GSIs and LSIs) to your table, and dynamically link your entity attributes.
+- **Batch Operations:** Full support for batch operations with a simpler interface to work with multiple entities and tables.
+- **Transactions:** Full support for transaction with a simpler interface to work with multiple entities and tables.
+- **Default Value Dependency Graphs:** Create dynamic attribute defaults by chaining other dynamic attribute defaults together.
+- **TypeScript Support:** v0.4 of this library provides strong typing support AND type inference 😍. Inferred type can still overriden with [Overlays](#overlays). Some [Utility Types](#utility-types) are also exposed. Additional work is still required to support schema validation & typings.
+
+## Additional References
+
+- [DocumentClient SDK Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_lib_dynamodb.html)
+- [Best Practices for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html)
+- [DynamoDB, explained.](https://www.dynamodbguide.com/)
+- [The DynamoDB Book](https://www.dynamodbbook.com/)
+
+## Contributions and Feedback
+
+Contributions, ideas and bug reports are welcome and greatly appreciated. Please add [issues](https://github.com/jeremydaly/dynamodb-toolbox/issues) for suggestions and bug reports or create a pull request. You can also contact me on Twitter: [@jeremy_daly](https://twitter.com/jeremy_daly).

@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist/esm",
-    "declaration": true
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmitHelpers": true,
+    "outDir": "dist/esm"
   },
-  "exclude": ["node_modules", "dist", "docs", "vitest.config.ts", "**/*.test.ts", "coverage"]
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test-d.ts"]
 }

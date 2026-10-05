@@ -1,98 +1,10 @@
 {
   "name": "dynamodb-toolbox",
-  "version": "local",
-  "description": "Lightweight and type-safe query builder for DynamoDB and TypeScript.",
-  "homepage": "https://www.dynamodbtoolbox.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dynamodb-toolbox/dynamodb-toolbox.git"
-  },
-  "bugs": {
-    "url": "https://github.com/dynamodb-toolbox/dynamodb-toolbox/issues"
-  },
-  "keywords": [
-    "dynamodb",
-    "query-builder",
-    "aws",
-    "serverless",
-    "nosql"
-  ],
-  "license": "MIT",
-  "contributors": [
-    "ThomasAribart <thomasa@theodo.fr>",
-    "Naor Peled <me@naor.dev>"
-  ],
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "type": "module",
-  "main": "dist/esm/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "devDependencies": {
-    "@arethetypeswrong/cli": "^0.15.4",
-    "@aws-sdk/client-dynamodb": "^3.1114.0",
-    "@aws-sdk/lib-dynamodb": "^3.1114.0",
-    "@aws-sdk/util-dynamodb": "^3.996.9",
-    "@modelcontextprotocol/sdk": "^1.12.0",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.67.0",
-    "@typescript-eslint/parser": "^8.67.0",
-    "aws-cdk-lib": "^2.226.0",
-    "aws-sdk-client-mock": "^4.0.1",
-    "constructs": "^10.5.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^50.8.0",
-    "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-unused-imports": "^4.2.0",
-    "mockdate": "^3.0.5",
-    "prettier": "^3.3.2",
-    "ts-toolbelt": "^9.6.0",
-    "tsc-alias": "^1.8.10",
-    "tsd": "^0.23.0",
-    "tsx": "^4.23.12",
-    "typescript": "^5.9.2",
-    "vite": "^6.4.3",
-    "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^3.2.6",
-    "zod": "^3.24.4"
-  },
-  "overrides": {
-    "lodash": "^4.18.1",
-    "js-yaml": "^4.3.1",
-    "express": "^5.2.1",
-    "postcss": "^8.5.26",
-    "brace-expansion": "^2.1.4",
-    "qs": "^6.15.3",
-    "flatted": "^3.4.4"
-  },
-  "peerDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.0.0",
-    "@aws-sdk/lib-dynamodb": "^3.0.0",
-    "@aws-sdk/util-dynamodb": "^3.0.0"
-  },
-  "scripts": {
-    "build:cjs": "tsc -p tsconfig.cjs.json && tsc-alias -p tsconfig.cjs.json && echo '{ \"type\": \"commonjs\" }' > dist/cjs/package.json",
-    "build:esm": "tsc -p tsconfig.esm.json && tsc-alias -p tsconfig.esm.json && echo '{ \"type\": \"module\" }' > dist/esm/package.json",
-    "build": "npm run build:cjs && npm run build:esm",
-    "test": "npm run test-type && npm run test-format && npm run test-unit && npm run test-lint && npm run test-exports",
-    "test-type": "tsc --noEmit",
-    "test-format": "prettier --check 'src/**/*.(js|ts)'",
-    "test-format-fix": "prettier --write 'src/**/*.(js|ts)'",
-    "test-unit": "vitest run --reporter=verbose",
-    "test-unit-watch": "vitest --reporter=verbose",
-    "test-lint": "eslint .",
-    "test-exports": "attw --pack . --ignore-rules no-resolution"
-  },
-  "files": [
-    "dist"
-  ],
+  "description": "A simple set of tools for working with Amazon DynamoDB and the DocumentClient.",
+  "author": "Jeremy Daly <jeremy@jeremydaly.com>",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
       "import": {
         "types": "./dist/esm/index.d.ts",
@@ -102,719 +14,79 @@
         "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
       }
-    },
-    "./schema": {
-      "import": {
-        "types": "./dist/esm/schema/index.d.ts",
-        "default": "./dist/esm/schema/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/index.d.ts",
-        "default": "./dist/cjs/schema/index.js"
-      }
-    },
-    "./schema/any": {
-      "import": {
-        "types": "./dist/esm/schema/any/index.d.ts",
-        "default": "./dist/esm/schema/any/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/any/index.d.ts",
-        "default": "./dist/cjs/schema/any/index.js"
-      }
-    },
-    "./schema/nul": {
-      "import": {
-        "types": "./dist/esm/schema/null/index.d.ts",
-        "default": "./dist/esm/schema/null/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/null/index.d.ts",
-        "default": "./dist/cjs/schema/null/index.js"
-      }
-    },
-    "./schema/boolean": {
-      "import": {
-        "types": "./dist/esm/schema/boolean/index.d.ts",
-        "default": "./dist/esm/schema/boolean/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/boolean/index.d.ts",
-        "default": "./dist/cjs/schema/boolean/index.js"
-      }
-    },
-    "./schema/number": {
-      "import": {
-        "types": "./dist/esm/schema/number/index.d.ts",
-        "default": "./dist/esm/schema/number/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/number/index.d.ts",
-        "default": "./dist/cjs/schema/number/index.js"
-      }
-    },
-    "./schema/string": {
-      "import": {
-        "types": "./dist/esm/schema/string/index.d.ts",
-        "default": "./dist/esm/schema/string/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/string/index.d.ts",
-        "default": "./dist/cjs/schema/string/index.js"
-      }
-    },
-    "./schema/binary": {
-      "import": {
-        "types": "./dist/esm/schema/binary/index.d.ts",
-        "default": "./dist/esm/schema/binary/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/binary/index.d.ts",
-        "default": "./dist/cjs/schema/binary/index.js"
-      }
-    },
-    "./schema/set": {
-      "import": {
-        "types": "./dist/esm/schema/set/index.d.ts",
-        "default": "./dist/esm/schema/set/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/set/index.d.ts",
-        "default": "./dist/cjs/schema/set/index.js"
-      }
-    },
-    "./schema/list": {
-      "import": {
-        "types": "./dist/esm/schema/list/index.d.ts",
-        "default": "./dist/esm/schema/list/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/list/index.d.ts",
-        "default": "./dist/cjs/schema/list/index.js"
-      }
-    },
-    "./schema/map": {
-      "import": {
-        "types": "./dist/esm/schema/map/index.d.ts",
-        "default": "./dist/esm/schema/map/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/map/index.d.ts",
-        "default": "./dist/cjs/schema/map/index.js"
-      }
-    },
-    "./schema/record": {
-      "import": {
-        "types": "./dist/esm/schema/record/index.d.ts",
-        "default": "./dist/esm/schema/record/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/record/index.d.ts",
-        "default": "./dist/cjs/schema/record/index.js"
-      }
-    },
-    "./schema/anyOf": {
-      "import": {
-        "types": "./dist/esm/schema/anyOf/index.d.ts",
-        "default": "./dist/esm/schema/anyOf/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/anyOf/index.d.ts",
-        "default": "./dist/cjs/schema/anyOf/index.js"
-      }
-    },
-    "./schema/item": {
-      "import": {
-        "types": "./dist/esm/schema/item/index.d.ts",
-        "default": "./dist/esm/schema/item/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/item/index.d.ts",
-        "default": "./dist/cjs/schema/item/index.js"
-      }
-    },
-    "./schema/actions/parse": {
-      "import": {
-        "types": "./dist/esm/schema/actions/parse/index.d.ts",
-        "default": "./dist/esm/schema/actions/parse/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/parse/index.d.ts",
-        "default": "./dist/cjs/schema/actions/parse/index.js"
-      }
-    },
-    "./schema/actions/format": {
-      "import": {
-        "types": "./dist/esm/schema/actions/format/index.d.ts",
-        "default": "./dist/esm/schema/actions/format/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/format/index.d.ts",
-        "default": "./dist/cjs/schema/actions/format/index.js"
-      }
-    },
-    "./schema/actions/jsonSchemer": {
-      "import": {
-        "types": "./dist/esm/schema/actions/jsonSchemer/index.d.ts",
-        "default": "./dist/esm/schema/actions/jsonSchemer/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/jsonSchemer/index.d.ts",
-        "default": "./dist/cjs/schema/actions/jsonSchemer/index.js"
-      }
-    },
-    "./schema/actions/zodSchemer": {
-      "import": {
-        "types": "./dist/esm/schema/actions/zodSchemer/index.d.ts",
-        "default": "./dist/esm/schema/actions/zodSchemer/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/zodSchemer/index.d.ts",
-        "default": "./dist/cjs/schema/actions/zodSchemer/index.js"
-      }
-    },
-    "./schema/actions/fromZodSchema": {
-      "import": {
-        "types": "./dist/esm/schema/actions/fromZodSchema/index.d.ts",
-        "default": "./dist/esm/schema/actions/fromZodSchema/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/fromZodSchema/index.d.ts",
-        "default": "./dist/cjs/schema/actions/fromZodSchema/index.js"
-      }
-    },
-    "./schema/actions/dto": {
-      "import": {
-        "types": "./dist/esm/schema/actions/dto/index.d.ts",
-        "default": "./dist/esm/schema/actions/dto/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/dto/index.d.ts",
-        "default": "./dist/cjs/schema/actions/dto/index.js"
-      }
-    },
-    "./schema/actions/fromDTO": {
-      "import": {
-        "types": "./dist/esm/schema/actions/fromDTO/index.d.ts",
-        "default": "./dist/esm/schema/actions/fromDTO/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/fromDTO/index.d.ts",
-        "default": "./dist/cjs/schema/actions/fromDTO/index.js"
-      }
-    },
-    "./schema/actions/finder": {
-      "import": {
-        "types": "./dist/esm/schema/actions/finder/index.d.ts",
-        "default": "./dist/esm/schema/actions/finder/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/schema/actions/finder/index.d.ts",
-        "default": "./dist/cjs/schema/actions/finder/index.js"
-      }
-    },
-    "./transformers": {
-      "import": {
-        "types": "./dist/esm/transformers/index.d.ts",
-        "default": "./dist/esm/transformers/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/index.d.ts",
-        "default": "./dist/cjs/transformers/index.js"
-      }
-    },
-    "./transformers/prefix": {
-      "import": {
-        "types": "./dist/esm/transformers/prefix.d.ts",
-        "default": "./dist/esm/transformers/prefix.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/prefix.d.ts",
-        "default": "./dist/cjs/transformers/prefix.js"
-      }
-    },
-    "./transformers/suffix": {
-      "import": {
-        "types": "./dist/esm/transformers/suffix.d.ts",
-        "default": "./dist/esm/transformers/suffix.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/suffix.d.ts",
-        "default": "./dist/cjs/transformers/suffix.js"
-      }
-    },
-    "./transformers/trim": {
-      "import": {
-        "types": "./dist/esm/transformers/trim.d.ts",
-        "default": "./dist/esm/transformers/trim.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/trim.d.ts",
-        "default": "./dist/cjs/transformers/trim.js"
-      }
-    },
-    "./transformers/jsonStringify": {
-      "import": {
-        "types": "./dist/esm/transformers/jsonStringify.d.ts",
-        "default": "./dist/esm/transformers/jsonStringify.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/jsonStringify.d.ts",
-        "default": "./dist/cjs/transformers/jsonStringify.js"
-      }
-    },
-    "./transformers/pipe": {
-      "import": {
-        "types": "./dist/esm/transformers/pipe.d.ts",
-        "default": "./dist/esm/transformers/pipe.js"
-      },
-      "require": {
-        "types": "./dist/cjs/transformers/pipe.d.ts",
-        "default": "./dist/cjs/transformers/pipe.js"
-      }
-    },
-    "./table": {
-      "import": {
-        "types": "./dist/esm/table/index.d.ts",
-        "default": "./dist/esm/table/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/index.d.ts",
-        "default": "./dist/cjs/table/index.js"
-      }
-    },
-    "./table/actions/scan": {
-      "import": {
-        "types": "./dist/esm/table/actions/scan/index.d.ts",
-        "default": "./dist/esm/table/actions/scan/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/scan/index.d.ts",
-        "default": "./dist/cjs/table/actions/scan/index.js"
-      }
-    },
-    "./table/actions/query": {
-      "import": {
-        "types": "./dist/esm/table/actions/query/index.d.ts",
-        "default": "./dist/esm/table/actions/query/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/query/index.d.ts",
-        "default": "./dist/cjs/table/actions/query/index.js"
-      }
-    },
-    "./table/actions/deletePartition": {
-      "import": {
-        "types": "./dist/esm/table/actions/deletePartition/index.d.ts",
-        "default": "./dist/esm/table/actions/deletePartition/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/deletePartition/index.d.ts",
-        "default": "./dist/cjs/table/actions/deletePartition/index.js"
-      }
-    },
-    "./table/actions/batchGet": {
-      "import": {
-        "types": "./dist/esm/table/actions/batchGet/index.d.ts",
-        "default": "./dist/esm/table/actions/batchGet/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/batchGet/index.d.ts",
-        "default": "./dist/cjs/table/actions/batchGet/index.js"
-      }
-    },
-    "./table/actions/batchWrite": {
-      "import": {
-        "types": "./dist/esm/table/actions/batchWrite/index.d.ts",
-        "default": "./dist/esm/table/actions/batchWrite/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/batchWrite/index.d.ts",
-        "default": "./dist/cjs/table/actions/batchWrite/index.js"
-      }
-    },
-    "./table/actions/accessPattern": {
-      "import": {
-        "types": "./dist/esm/table/actions/accessPattern/index.d.ts",
-        "default": "./dist/esm/table/actions/accessPattern/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/accessPattern/index.d.ts",
-        "default": "./dist/cjs/table/actions/accessPattern/index.js"
-      }
-    },
-    "./table/actions/parsePrimaryKey": {
-      "import": {
-        "types": "./dist/esm/table/actions/parsePrimaryKey/index.d.ts",
-        "default": "./dist/esm/table/actions/parsePrimaryKey/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/parsePrimaryKey/index.d.ts",
-        "default": "./dist/cjs/table/actions/parsePrimaryKey/index.js"
-      }
-    },
-    "./table/actions/spy": {
-      "import": {
-        "types": "./dist/esm/table/actions/spy/index.d.ts",
-        "default": "./dist/esm/table/actions/spy/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/spy/index.d.ts",
-        "default": "./dist/cjs/table/actions/spy/index.js"
-      }
-    },
-    "./table/actions/repository": {
-      "import": {
-        "types": "./dist/esm/table/actions/repository/index.d.ts",
-        "default": "./dist/esm/table/actions/repository/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/repository/index.d.ts",
-        "default": "./dist/cjs/table/actions/repository/index.js"
-      }
-    },
-    "./table/actions/cdk": {
-      "import": {
-        "types": "./dist/esm/table/actions/cdk/index.d.ts",
-        "default": "./dist/esm/table/actions/cdk/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/cdk/index.d.ts",
-        "default": "./dist/cjs/table/actions/cdk/index.js"
-      }
-    },
-    "./table/actions/dto": {
-      "import": {
-        "types": "./dist/esm/table/actions/dto/index.d.ts",
-        "default": "./dist/esm/table/actions/dto/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/dto/index.d.ts",
-        "default": "./dist/cjs/table/actions/dto/index.js"
-      }
-    },
-    "./table/actions/fromDTO": {
-      "import": {
-        "types": "./dist/esm/table/actions/fromDTO/index.d.ts",
-        "default": "./dist/esm/table/actions/fromDTO/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/fromDTO/index.d.ts",
-        "default": "./dist/cjs/table/actions/fromDTO/index.js"
-      }
-    },
-    "./table/actions/registry": {
-      "import": {
-        "types": "./dist/esm/table/actions/registry/index.d.ts",
-        "default": "./dist/esm/table/actions/registry/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/table/actions/registry/index.d.ts",
-        "default": "./dist/cjs/table/actions/registry/index.js"
-      }
-    },
-    "./entity": {
-      "import": {
-        "types": "./dist/esm/entity/index.d.ts",
-        "default": "./dist/esm/entity/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/index.d.ts",
-        "default": "./dist/cjs/entity/index.js"
-      }
-    },
-    "./entity/actions/get": {
-      "import": {
-        "types": "./dist/esm/entity/actions/get/index.d.ts",
-        "default": "./dist/esm/entity/actions/get/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/get/index.d.ts",
-        "default": "./dist/cjs/entity/actions/get/index.js"
-      }
-    },
-    "./entity/actions/put": {
-      "import": {
-        "types": "./dist/esm/entity/actions/put/index.d.ts",
-        "default": "./dist/esm/entity/actions/put/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/put/index.d.ts",
-        "default": "./dist/cjs/entity/actions/put/index.js"
-      }
-    },
-    "./entity/actions/update": {
-      "import": {
-        "types": "./dist/esm/entity/actions/update/index.d.ts",
-        "default": "./dist/esm/entity/actions/update/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/update/index.d.ts",
-        "default": "./dist/cjs/entity/actions/update/index.js"
-      }
-    },
-    "./entity/actions/update/symbols": {
-      "import": {
-        "types": "./dist/esm/entity/actions/update/symbols/index.d.ts",
-        "default": "./dist/esm/entity/actions/update/symbols/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/update/symbols/index.d.ts",
-        "default": "./dist/cjs/entity/actions/update/symbols/index.js"
-      }
-    },
-    "./entity/actions/updateAttributes": {
-      "import": {
-        "types": "./dist/esm/entity/actions/updateAttributes/index.d.ts",
-        "default": "./dist/esm/entity/actions/updateAttributes/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/updateAttributes/index.d.ts",
-        "default": "./dist/cjs/entity/actions/updateAttributes/index.js"
-      }
-    },
-    "./entity/actions/delete": {
-      "import": {
-        "types": "./dist/esm/entity/actions/delete/index.d.ts",
-        "default": "./dist/esm/entity/actions/delete/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/delete/index.d.ts",
-        "default": "./dist/cjs/entity/actions/delete/index.js"
-      }
-    },
-    "./entity/actions/batchGet": {
-      "import": {
-        "types": "./dist/esm/entity/actions/batchGet/index.d.ts",
-        "default": "./dist/esm/entity/actions/batchGet/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/batchGet/index.d.ts",
-        "default": "./dist/cjs/entity/actions/batchGet/index.js"
-      }
-    },
-    "./entity/actions/batchPut": {
-      "import": {
-        "types": "./dist/esm/entity/actions/batchPut/index.d.ts",
-        "default": "./dist/esm/entity/actions/batchPut/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/batchPut/index.d.ts",
-        "default": "./dist/cjs/entity/actions/batchPut/index.js"
-      }
-    },
-    "./entity/actions/batchDelete": {
-      "import": {
-        "types": "./dist/esm/entity/actions/batchDelete/index.d.ts",
-        "default": "./dist/esm/entity/actions/batchDelete/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/batchDelete/index.d.ts",
-        "default": "./dist/cjs/entity/actions/batchDelete/index.js"
-      }
-    },
-    "./entity/actions/transactGet": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactGet/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactGet/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactGet/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactGet/index.js"
-      }
-    },
-    "./entity/actions/transactWrite": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactWrite/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactWrite/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactWrite/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactWrite/index.js"
-      }
-    },
-    "./entity/actions/transactPut": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactPut/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactPut/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactPut/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactPut/index.js"
-      }
-    },
-    "./entity/actions/transactUpdate": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactUpdate/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactUpdate/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactUpdate/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactUpdate/index.js"
-      }
-    },
-    "./entity/actions/transactDelete": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactDelete/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactDelete/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactDelete/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactDelete/index.js"
-      }
-    },
-    "./entity/actions/transactCheck": {
-      "import": {
-        "types": "./dist/esm/entity/actions/transactCheck/index.d.ts",
-        "default": "./dist/esm/entity/actions/transactCheck/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/transactCheck/index.d.ts",
-        "default": "./dist/cjs/entity/actions/transactCheck/index.js"
-      }
-    },
-    "./entity/actions/accessPattern": {
-      "import": {
-        "types": "./dist/esm/entity/actions/accessPattern/index.d.ts",
-        "default": "./dist/esm/entity/actions/accessPattern/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/accessPattern/index.d.ts",
-        "default": "./dist/cjs/entity/actions/accessPattern/index.js"
-      }
-    },
-    "./entity/actions/parse": {
-      "import": {
-        "types": "./dist/esm/entity/actions/parse/index.d.ts",
-        "default": "./dist/esm/entity/actions/parse/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/parse/index.d.ts",
-        "default": "./dist/cjs/entity/actions/parse/index.js"
-      }
-    },
-    "./entity/actions/parseCondition": {
-      "import": {
-        "types": "./dist/esm/entity/actions/parseCondition/index.d.ts",
-        "default": "./dist/esm/entity/actions/parseCondition/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/parseCondition/index.d.ts",
-        "default": "./dist/cjs/entity/actions/parseCondition/index.js"
-      }
-    },
-    "./entity/actions/parsePaths": {
-      "import": {
-        "types": "./dist/esm/entity/actions/parsePaths/index.d.ts",
-        "default": "./dist/esm/entity/actions/parsePaths/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/parsePaths/index.d.ts",
-        "default": "./dist/cjs/entity/actions/parsePaths/index.js"
-      }
-    },
-    "./entity/actions/format": {
-      "import": {
-        "types": "./dist/esm/entity/actions/format/index.d.ts",
-        "default": "./dist/esm/entity/actions/format/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/format/index.d.ts",
-        "default": "./dist/cjs/entity/actions/format/index.js"
-      }
-    },
-    "./entity/actions/spy": {
-      "import": {
-        "types": "./dist/esm/entity/actions/spy/index.d.ts",
-        "default": "./dist/esm/entity/actions/spy/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/spy/index.d.ts",
-        "default": "./dist/cjs/entity/actions/spy/index.js"
-      }
-    },
-    "./entity/actions/repository": {
-      "import": {
-        "types": "./dist/esm/entity/actions/repository/index.d.ts",
-        "default": "./dist/esm/entity/actions/repository/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/repository/index.d.ts",
-        "default": "./dist/cjs/entity/actions/repository/index.js"
-      }
-    },
-    "./entity/actions/dto": {
-      "import": {
-        "types": "./dist/esm/entity/actions/dto/index.d.ts",
-        "default": "./dist/esm/entity/actions/dto/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/dto/index.d.ts",
-        "default": "./dist/cjs/entity/actions/dto/index.js"
-      }
-    },
-    "./entity/actions/fromDTO": {
-      "import": {
-        "types": "./dist/esm/entity/actions/fromDTO/index.d.ts",
-        "default": "./dist/esm/entity/actions/fromDTO/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/entity/actions/fromDTO/index.d.ts",
-        "default": "./dist/cjs/entity/actions/fromDTO/index.js"
-      }
-    },
-    "./database": {
-      "import": {
-        "types": "./dist/esm/database/index.d.ts",
-        "default": "./dist/esm/database/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/database/index.d.ts",
-        "default": "./dist/cjs/database/index.js"
-      }
-    },
-    "./database/actions/mcpToolkit": {
-      "import": {
-        "types": "./dist/esm/database/actions/mcpToolkit/index.d.ts",
-        "default": "./dist/esm/database/actions/mcpToolkit/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/database/actions/mcpToolkit/index.d.ts",
-        "default": "./dist/cjs/database/actions/mcpToolkit/index.js"
-      }
-    },
-    "./database/actions/synchronize": {
-      "import": {
-        "types": "./dist/esm/database/actions/synchronize/index.d.ts",
-        "default": "./dist/esm/database/actions/synchronize/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/database/actions/synchronize/index.d.ts",
-        "default": "./dist/cjs/database/actions/synchronize/index.js"
-      }
-    },
-    "./errors": {
-      "import": {
-        "types": "./dist/esm/errors/index.d.ts",
-        "default": "./dist/esm/errors/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/errors/index.d.ts",
-        "default": "./dist/cjs/errors/index.js"
-      }
-    },
-    "./types": {
-      "import": {
-        "types": "./dist/esm/types/index.d.ts",
-        "default": "./dist/esm/types/index.js"
-      },
-      "require": {
-        "types": "./dist/cjs/types/index.d.ts",
-        "default": "./dist/cjs/types/index.js"
-      }
     }
   },
+  "type": "module",
+  "scripts": {
+    "test": "jest unit",
+    "test-cov": "jest unit --coverage",
+    "test-ci": "eslint . && jest unit --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test-types": "tsd",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "build:cjs": "tsc -p tsconfig.cjs.json && echo '{ \"type\": \"commonjs\" }' > dist/cjs/package.json",
+    "build:esm": "tsc -p tsconfig.esm.json && echo '{ \"type\": \"module\" }' > dist/esm/package.json",
+    "build": "npm run build:cjs & npm run build:esm",
+    "prebuild": "rm -rf dist",
+    "prepublishOnly": "npm test && npm run lint && npm run test-types",
+    "changelog": "git log $(git describe --tags --abbrev=0)..HEAD --oneline"
+  },
+  "license": "MIT",
+  "contributors": [
+    "ThomasAribart <thomasa@theodo.fr>",
+    "Naor Peled <me@naor.dev>"
+  ],
   "dependencies": {
-    "hotscript": "^1.0.13"
-  }
+    "deep-copy": "^1.4.2",
+    "ts-toolbelt": "^9.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremydaly/dynamodb-toolbox.git"
+  },
+  "keywords": [
+    "serverless",
+    "aws",
+    "dynamodb",
+    "nosql"
+  ],
+  "bugs": {
+    "url": "https://github.com/jeremydaly/dynamodb-toolbox/issues"
+  },
+  "homepage": "https://github.com/jeremydaly/dynamodb-toolbox#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.0.0",
+    "@aws-sdk/client-dynamodb": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.1",
+    "@types/node": "^14.14.16",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "@aws-sdk/lib-dynamodb": "^3.287.0",
+    "@aws-sdk/client-dynamodb": "^3.287.0",
+    "@aws-sdk/util-dynamodb": "^3.287.0",
+    "coveralls": "^3.1.0",
+    "eslint": "^8.2.0",
+    "jest": "^29.2.2",
+    "prettier": "^2.2.1",
+    "ts-jest": "^29.0.3",
+    "tsd": "^0.23.0",
+    "typescript": "^4.1.3"
+  },
+  "files": [
+    "dist/cjs/index.*",
+    "dist/cjs/package.json",
+    "dist/cjs/constants.*",
+    "dist/cjs/classes/",
+    "dist/cjs/lib/",
+    "dist/esm/index.*",
+    "dist/esm/package.json",
+    "dist/esm/constants.*",
+    "dist/esm/classes/",
+    "dist/esm/lib/"
+  ]
 }

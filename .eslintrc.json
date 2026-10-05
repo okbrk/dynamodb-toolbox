@@ -1,91 +1,53 @@
 {
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier"
-  ],
-  "plugins": [
-    "@typescript-eslint",
-    "prefer-arrow",
-    "unused-imports",
-    "prettier",
-    "import",
-    "jsdoc"
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "root": true,
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "settings": {
-    "jsdoc": {
-      "mode": "typescript",
-      "definedTags": ["debt", "interceptable"]
-    }
-  },
   "rules": {
-    "jsdoc/require-jsdoc": [
+    "linebreak-style": [
       "error",
-      {
-        "publicOnly": { "esm": true },
-        "enableFixer": false,
-        "exemptEmptyConstructors": true,
-        "require": {
-          "FunctionDeclaration": true,
-          "FunctionExpression": true,
-          "ArrowFunctionExpression": true,
-          "ClassDeclaration": true,
-          "ClassExpression": true
-        },
-        "contexts": [
-          "MethodDefinition:not([accessibility=\"private\"]):not([key.type=\"PrivateIdentifier\"])",
-          "TSTypeAliasDeclaration",
-          "TSInterfaceDeclaration",
-          "TSEnumDeclaration"
-        ]
-      }
+      "unix"
     ],
-    "import/extensions": ["error", "always"],
-    "prettier/prettier": "error",
-    "linebreak-style": ["error", "unix"],
     "quotes": [
       "error",
       "single",
       {
-        "allowTemplateLiterals": true,
-        "avoidEscape": true
+        "allowTemplateLiterals": true
       }
     ],
-    "semi": ["error", "never"],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "flatTernaryExpressions": true
+      }
+    ],
     // TODO: remove this rule when all the code is fully migrated to TS, atm it just produces a lot of noise
     "@typescript-eslint/ban-ts-comment": "off",
     // TODO: remove this rule when all the code is fully migrated to TS, atm it just produces a lot of noise
     "@typescript-eslint/no-explicit-any": "off",
-    // typescript-eslint v8 split the former `ban-types` rule into these; keep them off as before
-    "@typescript-eslint/no-empty-object-type": "off",
-    "@typescript-eslint/no-unsafe-function-type": "off",
-    "@typescript-eslint/no-wrapper-object-types": "error",
-    "@typescript-eslint/no-unused-expressions": "off",
-    // v8 flipped the `caughtErrors` default to "all"; keep ignoring unused catch bindings as before
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-non-null-assertion": "warn",
-    "@typescript-eslint/consistent-type-imports": "error"
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/no-non-null-assertion": "warn"
   },
-  "overrides": [
-    {
-      "files": ["**/*.test.ts"],
-      "rules": {
-        "@typescript-eslint/no-unused-vars": "off",
-        "jsdoc/require-jsdoc": "off"
-      }
-    }
-  ],
   "globals": {
     "expect": true,
     "it": true

@@ -1,29 +1,22 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const { themes } = require('prism-react-renderer')
-
-const lightCodeTheme = {
-  ...themes.vsLight,
-  plain: { ...themes.vsLight.plain, backgroundColor: '#f8f8f8' }
-}
-const darkCodeTheme = {
-  ...themes.vsDark,
-  plain: { ...themes.vsDark.plain, backgroundColor: '#242424' }
-}
+const lightCodeTheme = require('prism-react-renderer/themes/github')
+const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DynamoDB Toolbox',
-  tagline: 'DynamoDB Toolbox made easy!',
+  tagline: 'Single Table Designs have never been this easy!',
   url: 'https://www.dynamodbtoolbox.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'dynamodb-toolbox', // Usually your GitHub org/user name.
+  organizationName: 'jeremydaly', // Usually your GitHub org/user name.
   projectName: 'dynamodb-toolbox', // Usually your repo name.
   trailingSlash: false,
 
@@ -35,14 +28,6 @@ const config = {
     locales: ['en']
   },
 
-  markdown: {
-    mermaid: true,
-    hooks: {
-      onBrokenMarkdownLinks: 'warn'
-    }
-  },
-  themes: ['@docusaurus/theme-mermaid'],
-
   presets: [
     [
       'classic',
@@ -50,10 +35,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          lastVersion: 'current',
-          versions: {
-            current: { label: 'v2', path: '/' }
-          }
+          // routeBasePath: '/', // Serve the docs at the site's root
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/jeremydaly/dynamodb-toolbox/tree/main/docs'
         },
         blog: false,
         theme: {
@@ -73,34 +57,81 @@ const config = {
     ({
       image: 'img/dynamodb-toolbox-card.png',
       navbar: {
-        hideOnScroll: true,
-        style: 'dark',
-        title: 'DynamoDB-Toolbox',
+        // title: 'DynamoDB Toolbox',
         logo: {
-          alt: 'DynamoDB-Toolbox',
-          src: 'img/logo.svg',
-          style: {
-            'border-radius': '50%',
-            border: 'solid 1px gray'
-          }
+          alt: 'DynamoDB Toolbox',
+          src: 'img/dynamodb-toolbox-logo.svg',
+          srcDark: 'img/dynamodb-toolbox-logo-dark.svg'
         },
         items: [
           {
-            type: 'docsVersionDropdown',
-            position: 'left'
+            type: 'doc',
+            docId: 'introduction/what-is-dynamodb-toolbox',
+            position: 'right',
+            label: 'Documentation'
           },
+          // { to: '/blog', label: 'Blog', position: 'left' },
+
           {
-            href: 'https://github.com/dynamodb-toolbox/dynamodb-toolbox',
+            href: 'https://github.com/jeremydaly/dynamodb-toolbox',
             position: 'right',
             className: 'header-github-link',
             'aria-label': 'GitHub repository'
           }
         ]
       },
+      footer: {
+        style: 'dark',
+        links: [
+          {
+            title: 'Documentation',
+            items: [
+              {
+                label: 'What is DynamoDB Toolbox?',
+                to: '/docs'
+              },
+              {
+                label: 'Quick Start',
+                to: '/docs/introduction/quick-start'
+              },
+              {
+                label: 'Contributing',
+                to: '/docs/contributing/'
+              }
+            ]
+          },
+          {
+            title: 'Community',
+            items: [
+              {
+                label: 'GitHub Discussions',
+                href: 'https://github.com/jeremydaly/dynamodb-toolbox/discussions'
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/jeremy_daly'
+              }
+            ]
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'GitHub',
+                href: 'https://github.com/jeremydaly/dynamodb-toolbox'
+              },
+              {
+                label: 'Issues',
+                href: 'https://github.com/jeremydaly/dynamodb-toolbox/issues'
+              }
+            ]
+          }
+        ],
+        copyright: `Copyright © ${new Date().getFullYear()} - Jeremy Daly`
+      },
       prism: {
         theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
-        additionalLanguages: ['diff', 'diff-ts']
+        darkTheme: darkCodeTheme
       },
       docs: {
         sidebar: {
@@ -108,29 +139,26 @@ const config = {
           autoCollapseCategories: false
         }
       },
-      mermaid: {
-        theme: { light: 'default', dark: 'dark' }
-      },
       algolia: {
         // The application ID provided by Algolia
-        appId: 'C6EU7OCQ7D',
+        appId: 'XS94BW9P52',
+
         // Public API key: it is safe to commit it
-        apiKey: 'e6c6e967d6c14cbf9e800cab158ba3e1',
+        apiKey: 'c95bd6f22598598ec831d3ba7aa5ac7c',
+
         indexName: 'dynamodbtoolbox',
+
         // Optional: see doc section below
         contextualSearch: true,
+
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         // externalUrlRegex: 'external\\.com|domain\\.com',
+
         // Optional: Algolia search parameters
         // searchParameters: {},
+
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search'
-      },
-      announcementBar: {
-        id: 'dynamodb_toolshack_beta',
-        content:
-          '🙌 Announcing <b>DynamoDB-Toolshack</b>: A comprehensive DynamoDB studio based on DynamoDB-Toolbox 🙌<br/><div><a href="https://dynamodb-toolshack.com/" target="_blank" rel="noopener noreferrer">Learn More</a> • <a href="https://demo.dynamodb-toolshack.com/" target="_blank" rel="noopener noreferrer">Online Demo</a> • <a href="https://aws.amazon.com/marketplace/pp/prodview-rexdp6m3af2hg" target="_blank" rel="noopener noreferrer">Join Beta</a></div>',
-        isCloseable: true
       }
     })
 }

@@ -13,9 +13,3 @@ dist
 
 # dev env settings
 .vscode
-
-# for test-exports script
-dynamodb-toolbox-*.tgz
-
-# playwright mcp output
-.playwright-mcp
